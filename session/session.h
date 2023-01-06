@@ -4,5 +4,6 @@ void* mainSession(void);
 void* newSession(void);
 void useSession(void* session);
 void endSession(void* session);
+void* globals();
 void runString(const char* code);
 void runFile(const char* filename);

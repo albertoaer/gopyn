@@ -5,6 +5,8 @@ package session
 import "C"
 import (
 	"unsafe"
+
+	"github.com/albertoaer/gopyn/objects"
 )
 
 type Python struct {
@@ -40,4 +42,9 @@ func (p *Python) RunFile(filename string) {
 	cstr := C.CString(filename)
 	defer C.free(unsafe.Pointer(cstr))
 	C.runFile(cstr)
+}
+
+func (p *Python) Globals() objects.PyObject {
+	C.useSession(p.session)
+	return objects.PyObjectFrom(C.globals())
 }

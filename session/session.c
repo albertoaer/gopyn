@@ -30,6 +30,10 @@ void endSession(void* session) {
   Py_EndInterpreter(session);
 }
 
+void* globals(void) {
+  return PyImport_AddModule("__main__");
+}
+
 void runString(const char* code) {
   PyRun_SimpleString(code);
 }
