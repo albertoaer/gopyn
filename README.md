@@ -14,6 +14,8 @@ import (
 func main() {
 	python := session.MainPython()
 	python.RunFile("script.py")
+	i, e := python.Globals().Get("some_variable").Int()
+	fmt.Printf("%d %v\n", i, e) // Print the value with the possible conversion error
 }
 ```
 
