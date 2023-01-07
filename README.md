@@ -8,13 +8,15 @@ package main
 import (
 	"fmt"
 
+	"github.com/albertoaer/gopyn/objects"
 	"github.com/albertoaer/gopyn/session"
 )
 
 func main() {
 	python := session.MainPython()
 	python.RunFile("script.py")
-	i, e := python.Globals().Get("some_variable").Int()
+	globals := objects.Wrap(python.Globals())
+	i, e := globals.Get("some_variable").Int()
 	fmt.Printf("%d %v\n", i, e) // Print the value with the possible conversion error
 }
 ```
