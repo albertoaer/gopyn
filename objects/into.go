@@ -3,7 +3,12 @@ package objects
 //#include "objects.h"
 //#include "stdlib.h"
 import "C"
-import "errors"
+import (
+	"errors"
+
+	"github.com/albertoaer/gopyn/callables"
+	"github.com/albertoaer/gopyn/common"
+)
 
 func (p PyObject) Repr() string {
 	cstr := C.toRepr(p.ref)
@@ -48,4 +53,8 @@ func (p PyObject) Float() (float64, error) {
 		return 0, errors.New("float conversion error")
 	}
 	return float64(v), nil
+}
+
+func (p PyObject) Fn() (common.PyCallable, error) {
+	return callables.TryWrapFunction(p.ref)
 }

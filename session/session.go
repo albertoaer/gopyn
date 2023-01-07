@@ -6,7 +6,7 @@ import "C"
 import (
 	"unsafe"
 
-	"github.com/albertoaer/gopyn/objects"
+	"github.com/albertoaer/gopyn/common"
 )
 
 type Python struct {
@@ -44,7 +44,7 @@ func (p *Python) RunFile(filename string) {
 	C.runFile(cstr)
 }
 
-func (p *Python) Globals() objects.PyObject {
+func (p *Python) Globals() common.PyObjectRef {
 	C.useSession(p.session)
-	return objects.PyObjectFrom(C.globals())
+	return common.PyObjectRef(C.globals())
 }
